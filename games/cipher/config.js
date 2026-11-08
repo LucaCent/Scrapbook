@@ -13,8 +13,8 @@ window.GAME_CONFIG = {
   rounds: [
     { plain: 'I FOUND YOU',        shift: 3,  live: true,
       hint: 'Line the inner A up under the outer D.' },
-    { plain: 'WE ARE A GOOD TEAM', shift: 13, live: true,
-      hint: 'Halfway round the alphabet.' },
+    { plain: 'BERLIN PRAGUE VIENNA', shift: 7, live: true,
+      hint: 'Line the inner A up under the outer H.' },
     { plain: 'ALWAYS AND FOREVER', shift: 4,  live: false,
       hint: 'The key is the number of letters in the word LOVE. Type what you decode.' },
   ],

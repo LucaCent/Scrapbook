@@ -9,8 +9,8 @@ window.GAME_CONFIG = {
 
   image: '../../assets/images/paint-1.jpg',
 
-  cols: 16,       // squares across; rows follow the photo's proportions
-  colors: 7,      // palette size (5-10 works best)
+  cols: 18,       // squares across; rows follow the photo's proportions
+  colors: 8,      // palette size (5-10 works best)
 
   winMessage: 'The picture is complete. One last letter.',
 };

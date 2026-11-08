@@ -12,7 +12,7 @@
    ========================================================================== */
 
 // >>> PRECACHE (generated)
-const CACHE_VERSION = '4cd49ff0f8f6';
+const CACHE_VERSION = '93ced480905c';
 const PRECACHE = [
   './',
   './index.html',

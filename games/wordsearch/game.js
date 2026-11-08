@@ -79,8 +79,11 @@
 
   // ---- DOM ---------------------------------------------------------------
   const banner = SB.el('img', { class: 'banner', src: cfg.image, alt: '' });
+  banner.style.aspectRatio = cfg.bannerAspect || '16 / 7';     // crop shape for this photo
+  banner.style.objectPosition = cfg.bannerFocus || '50% 50%';  // which part of the photo to keep
   banner.addEventListener('error', () => { banner.style.display = 'none'; });
-  const frame = SB.el('div', { class: 'frame' }, [banner, SB.el('p', { class: 'caption', text: cfg.caption || '' })]);
+  const frame = SB.el('div', { class: 'frame' }, [banner]);
+  if (cfg.caption) frame.append(SB.el('p', { class: 'caption', text: cfg.caption }));   // only when set
 
   const lettersGrid = SB.el('div', { class: 'letters-grid' });
   lettersGrid.style.gridTemplateColumns = 'repeat(' + cfg.cols + ', 1fr)';

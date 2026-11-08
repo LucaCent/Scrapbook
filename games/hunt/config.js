@@ -12,19 +12,19 @@ window.GAME_CONFIG = {
 
   rounds: [
     {
-      image: '../../assets/images/hunt-1.jpg',
+      image: '../../assets/images/hunt-1.jpg',          // the Christmas tree
       targets: [
-        { x: 22, y: 28, r: 7, label: 'The red kite',    clue: 'Something that flies on a string' },
-        { x: 71, y: 41, r: 7, label: 'The golden star', clue: 'It shines, but it is not the sun' },
-        { x: 48, y: 76, r: 7, label: 'The heart stone', clue: 'Hidden near the ground, shaped like love' },
+        { x: 21.8, y: 16.8, r: 9,   label: 'The glowing holly', clue: 'Green neon leaves above the doorway' },
+        { x: 75.3, y: 36.5, r: 5.5, label: 'The red heart',     clue: 'A heart on the tree with writing on it' },
+        { x: 46.8, y: 46.8, r: 9,   label: 'The cuddle',        clue: 'Small, fluffy and being held' },
       ],
     },
     {
-      image: '../../assets/images/hunt-2.jpg',
+      image: '../../assets/images/hunt-2.jpg',          // the checkpoint in Berlin
       targets: [
-        { x: 15, y: 70, r: 7, label: 'The blue boat',   clue: 'It floats' },
-        { x: 80, y: 22, r: 7, label: 'The little moon', clue: 'Up high, curved like a smile' },
-        { x: 55, y: 50, r: 7, label: 'The key',         clue: 'It opens something' },
+        { x: 8.5,  y: 21,   r: 7.5, label: 'The Rock Shop',    clue: 'Somewhere to buy rock and roll souvenirs' },
+        { x: 30.3, y: 25.2, r: 6, label: 'The checkpoint sign', clue: 'A sign above the little white hut' },
+        { x: 54.5, y: 25,   r: 9, label: 'The flag tree',       clue: 'A fir tree hung with blue and yellow flags' },
       ],
     },
   ],

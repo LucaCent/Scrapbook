@@ -5,8 +5,8 @@ window.GAME_CONFIG = {
 
   // One level per entry. Each level may use its own photo and grid size.
   levels: [
-    { image: '../../assets/images/rotate-1.jpg', cols: 3, rows: 4 },
-    { image: '../../assets/images/rotate-2.jpg', cols: 4, rows: 5 },
+    { image: '../../assets/images/rotate-1.jpg', cols: 3, rows: 4 },   // portrait photo
+    { image: '../../assets/images/rotate-2.jpg', cols: 5, rows: 4 },   // landscape photo: more columns than rows
   ],
 
   showCorrect: true,   // outline tiles that are already the right way up

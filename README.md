@@ -35,8 +35,11 @@ files directly with file:// works for the games but skips offline caching.)
 
 ## Use your own photos
 
-1. Put photos in `assets/images/` (any names; keep them under ~300 KB each,
-   roughly 1000 px on the long side, for fast loading from a QR scan).
+1. Prepare each photo with `python3 tools/prepare_photo.py INPUT.jpg assets/images/NAME.jpg`.
+   It bakes in phone rotation, removes hidden metadata (including GPS location,
+   which would otherwise be public), and shrinks to about 1280 px so it loads
+   quickly from a QR scan. For the cipher dial, which shows a circle, add
+   `--crop LEFT,TOP,SIZE` to cut a square around the faces first.
 2. Edit the matching `games/<name>/config.js` and point the paths at them.
 3. **Hunt only:** reposition the targets. Open
    `games/hunt/index.html?calibrate=1`, tap each hiding place and copy the
