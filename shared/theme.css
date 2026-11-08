@@ -1,0 +1,190 @@
+/* ==========================================================================
+   Scrapbook games — shared theme
+   Valentine's palette: blush paper, rose accents, deep-berry ink.
+   System fonts only, so everything works offline.
+
+   Most colours live in these variables. A few are set in JavaScript because
+   canvas/SVG drawing cannot read them directly:
+     games/scratch/game.js   foil gradient (rose gold)
+     games/hunt/game.js      hot/cold thermometer bands
+     games/wordsearch/game.js highlight hues
+     games/cipher/game.js    dial ring colours
+     shared/core.js          confetti hearts
+   ========================================================================== */
+
+:root {
+  --paper:      #fff0f3;   /* blush background */
+  --paper-dark: #f9d5de;   /* soft pink: borders, empty states */
+  --ink:        #5a2438;   /* deep berry: main text */
+  --ink-soft:   #8c5468;   /* dusty rose: secondary text */
+  --accent:     #e0457b;   /* rose pink: primary buttons, big letter */
+  --accent-2:   #9c2f5f;   /* wine: secondary buttons, focus rings */
+  --good:       #3a9b6e;   /* success (kept green so "done" reads clearly) */
+  --warn:       #e8a33d;
+  --shadow:     0 6px 18px rgba(90,36,56, .25);
+  --radius:     14px;
+  --font-body:  Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  --font-hand:  "Bradley Hand", "Segoe Script", "Comic Sans MS", cursive;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(255,255,255,.35), transparent 40%),
+    repeating-linear-gradient(45deg, rgba(224,69,123,.035) 0 2px, transparent 2px 6px),
+    var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Avoid pull-to-refresh and double-tap zoom stealing taps; pinch-zoom stays
+     available for accessibility. Interactive canvases opt out individually. */
+  overscroll-behavior: none;
+  touch-action: manipulation;
+}
+
+.page {
+  width: 100%;
+  max-width: 520px;
+  padding: 14px 14px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#stage { display: flex; flex-direction: column; gap: 12px; }
+
+/* ---- Header ------------------------------------------------------------ */
+.top { text-align: center; }
+.top h1 {
+  margin: 4px 0 0;
+  font-family: var(--font-hand);
+  font-size: 1.9rem;
+  letter-spacing: .5px;
+}
+.top p { margin: 2px 0 0; color: var(--ink-soft); font-size: .98rem; }
+
+/* ---- Polaroid-style frame --------------------------------------------- */
+.frame {
+  background: #fffafb;
+  padding: 10px 10px 12px;
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+  transform: rotate(-.6deg);
+}
+.frame.straight { transform: none; }
+
+/* ---- HUD row (counters, hints) ---------------------------------------- */
+.hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  font-size: .95rem;
+  color: var(--ink-soft);
+  min-height: 1.6em;
+}
+.hud strong { color: var(--ink); }
+
+.dots { display: flex; gap: 6px; }
+.dots i {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--paper-dark);
+  border: 1px solid rgba(90,36,56,.3);
+}
+.dots i.on  { background: var(--accent); border-color: var(--accent); }
+.dots i.cur { outline: 2px solid var(--accent-2); outline-offset: 1px; }
+
+/* ---- Buttons ----------------------------------------------------------- */
+.btn {
+  appearance: none;
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 22px;
+  min-height: 46px;               /* comfortable touch target */
+  font: inherit;
+  font-weight: 700;
+  color: #fff;
+  background: var(--accent);
+  box-shadow: 0 3px 0 rgba(0,0,0,.2);
+  cursor: pointer;
+}
+.btn:active { transform: translateY(2px); box-shadow: 0 1px 0 rgba(0,0,0,.2); }
+.btn.alt   { background: var(--accent-2); }
+.btn.ghost { background: transparent; color: var(--ink); box-shadow: none; border: 2px solid var(--ink-soft); }
+.btn[disabled] { opacity: .45; pointer-events: none; }
+.row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+/* ---- Utility ----------------------------------------------------------- */
+.hint {
+  font-family: var(--font-hand);
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 1.1rem;
+  min-height: 1.5em;
+}
+.error-box {
+  background: #ffe3ec; border: 2px solid var(--accent); color: #7d1a3f;
+  padding: 12px 14px; border-radius: var(--radius);
+}
+.shake { animation: shake .35s; }
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  20% { transform: translateX(-7px); } 40% { transform: translateX(7px); }
+  60% { transform: translateX(-5px); } 80% { transform: translateX(5px); }
+}
+
+/* ---- Win overlay ------------------------------------------------------- */
+.overlay {
+  position: fixed; inset: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(60,14,34, .72);
+  padding: 20px;
+  animation: fade .35s ease both;
+}
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+.overlay .card {
+  width: min(92vw, 420px);
+  background: #fffafb;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  padding: 22px 20px 20px;
+  text-align: center;
+  animation: pop .5s cubic-bezier(.2, 1.4, .4, 1) both;
+}
+@keyframes pop { from { transform: scale(.7) rotate(-4deg); opacity: 0; } to { transform: none; opacity: 1; } }
+.overlay .kicker { margin: 0; color: var(--ink-soft); letter-spacing: 2px; text-transform: uppercase; font-size: .8rem; }
+.overlay .big-letter {
+  font-family: var(--font-hand);
+  font-size: 7.5rem; line-height: 1;
+  color: var(--accent);
+  margin: 4px 0 2px;
+  text-shadow: 3px 3px 0 var(--paper-dark);
+}
+.overlay .msg { margin: 0 0 12px; }
+.overlay .progress {
+  font-family: var(--font-hand); font-size: 1.7rem; letter-spacing: 6px;
+  margin: 8px 0 16px; color: var(--ink);
+}
+.overlay .progress .missing { color: var(--paper-dark); }
+.overlay .progress .space { display: inline-block; width: 14px; }
+
+.heart {
+  position: fixed; bottom: -40px; z-index: 60; pointer-events: none;
+  animation: rise linear forwards;
+}
+@keyframes rise {
+  to { transform: translateY(-110vh) rotate(25deg); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heart { display: none; }
+  .overlay, .overlay .card, .shake { animation: none; }
+}

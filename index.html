@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fff0f3">
+  <title>Scrapbook</title>
+  <link rel="stylesheet" href="shared/theme.css">
+  <style>
+    .letters {
+      /* Never wrap: the phrase must read as one line. Size scales with the viewport. */
+      display: flex; justify-content: center; gap: 4px; flex-wrap: nowrap;
+      font-family: var(--font-hand); font-size: clamp(1.7rem, 9vw, 2.8rem); line-height: 1.1;
+      margin: 8px 0 2px;
+    }
+    .letters .slot {
+      width: 1.1em; text-align: center; border-bottom: 3px solid var(--ink-soft);
+      color: var(--accent); min-height: 1.2em;
+    }
+    .letters .gap { width: .45em; flex: none; }
+    .letters .slot { flex: none; }
+    .final {
+      text-align: center; font-family: var(--font-hand);
+      font-size: 1.5rem; color: var(--accent); min-height: 1.6em;
+    }
+    .list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+    .list a {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 14px; border-radius: var(--radius); text-decoration: none;
+      color: var(--ink); background: #fffafb; box-shadow: 0 2px 6px rgba(90,36,56,.18);
+      min-height: 52px;
+    }
+    .list .done { color: var(--good); font-weight: 700; }
+    .note { font-size: .85rem; color: var(--ink-soft); text-align: center; margin: 4px 0 0; }
+    #offline { color: var(--good); }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="top">
+      <h1>Collected letters</h1>
+      <p>Each page of the scrapbook hides one letter.</p>
+    </header>
+
+    <div class="frame straight">
+      <div class="letters" id="letters" aria-label="Collected letters"></div>
+      <div class="final" id="final"></div>
+    </div>
+
+    <ul class="list" id="list"></ul>
+
+    <div class="row">
+      <button class="btn ghost" id="reset" type="button">Reset progress</button>
+    </div>
+    <p class="note" id="offline"></p>
+    <p class="note">This page is only a progress board; the QR codes open the games directly.</p>
+  </div>
+
+  <script src="shared/core.js"></script>
+  <script>
+    (function () {
+      var got = SB.getLetters();
+      var lettersEl = SB.$('#letters');
+      var listEl = SB.$('#list');
+
+      SB.GAMES.forEach(function (g, i) {
+        lettersEl.append(SB.el('div', { class: 'slot', text: got[g.id] ? g.letter : '' }));
+        if (i === 0 || i === 4) lettersEl.append(SB.el('div', { class: 'gap' }));
+
+        var status = SB.el('span', { class: got[g.id] ? 'done' : '', text: got[g.id] ? 'Found ' + g.letter : 'Not yet' });
+        var a = SB.el('a', { href: g.path + 'index.html' }, [SB.el('span', { text: (i + 1) + '. ' + g.title }), status]);
+        listEl.append(SB.el('li', null, [a]));
+      });
+
+      if (SB.GAMES.every(function (g) { return got[g.id]; })) {
+        SB.$('#final').textContent = 'I love u ❤';
+      }
+
+      SB.$('#reset').addEventListener('click', function () {
+        if (confirm('Clear all collected letters on this device?')) { SB.resetLetters(); location.reload(); }
+      });
+
+      if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+        SB.$('#offline').textContent = 'Offline mode is ready on this device.';
+      }
+    })();
+  </script>
+</body>
+</html>

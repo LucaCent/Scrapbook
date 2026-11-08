@@ -1,0 +1,34 @@
+.banner {
+  display: block; width: 100%; aspect-ratio: 16 / 7; object-fit: cover;
+  border-radius: 2px; background: var(--paper-dark);
+}
+.caption {
+  margin: 8px 0 0; text-align: center;
+  font-family: var(--font-hand); font-size: 1.2rem; color: var(--ink-soft);
+}
+
+.grid-wrap {
+  position: relative; margin: 0 auto; width: 100%;
+  background: #fffafb; border-radius: 6px; padding: 6px;
+  box-shadow: var(--shadow); user-select: none; -webkit-user-select: none;
+}
+.letters-grid {
+  display: grid; width: 100%;
+  font-family: ui-rounded, "Trebuchet MS", system-ui, sans-serif; font-weight: 700;
+  color: var(--ink);
+}
+.cell {
+  aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+  font-size: clamp(14px, 4.6vw, 24px);
+}
+svg.overlay-svg {
+  position: absolute; inset: 6px; width: calc(100% - 12px); height: calc(100% - 12px);
+  pointer-events: none;
+}
+
+.words { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.chip {
+  padding: 6px 12px; border-radius: 999px; background: #fffafb;
+  box-shadow: 0 1px 4px rgba(90,36,56,.2); font-size: .95rem;
+}
+.chip.done { background: var(--good); color: #fff; text-decoration: line-through; }

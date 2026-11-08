@@ -1,0 +1,34 @@
+.board {
+  display: grid;
+  gap: 3px;
+  margin: 0 auto;
+  background: #fffafb;
+  transition: gap .5s ease;
+}
+.board.solved { gap: 0; }
+
+.tile {
+  position: relative;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  background: var(--paper-dark);
+  overflow: hidden;           /* a rotated square never leaves its own box, this is belt and braces */
+  cursor: pointer;
+  border-radius: 3px;
+}
+.board.solved .tile { border-radius: 0; }
+.tile canvas {
+  display: block;
+  width: 100%; height: 100%;
+  transition: transform .22s ease-out;
+  pointer-events: none;       /* taps go to the button, not the canvas */
+}
+.tile.ok::after {
+  content: '';
+  position: absolute; inset: 0;
+  box-shadow: inset 0 0 0 3px rgba(58,155,110, .85);
+  pointer-events: none;
+}
+.board.solved .tile.ok::after { display: none; }
+.tile:focus-visible { outline: 3px solid var(--accent-2); outline-offset: -3px; }
