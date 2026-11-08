@@ -5,9 +5,9 @@ window.GAME_CONFIG = {
 
   // One round per image. Add or remove entries to change the number of rounds.
   rounds: [
-    { image: '../../assets/images/scratch-1.jpg', caption: 'Where it all began' },
-    { image: '../../assets/images/scratch-2.jpg', caption: 'A favourite day' },
-    { image: '../../assets/images/scratch-3.jpg', caption: 'Still my favourite' },
+    { image: '../../assets/images/scratch-1.jpg' },
+    { image: '../../assets/images/scratch-2.jpg' },
+    { image: '../../assets/images/scratch-3.jpg' },
   ],
 
   brushRadius: 26,        // CSS pixels; a finger is roughly 20–30

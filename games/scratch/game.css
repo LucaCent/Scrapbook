@@ -13,7 +13,3 @@
 }
 .scratch-wrap img { object-fit: cover; user-select: none; -webkit-user-drag: none; }
 .scratch-wrap canvas { cursor: crosshair; }
-.caption {
-  margin: 8px 0 0; text-align: center;
-  font-family: var(--font-hand); font-size: 1.2rem; color: var(--ink-soft);
-}

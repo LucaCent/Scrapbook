@@ -25,9 +25,8 @@
   const canvas = SB.el('canvas');
   wrap.append(img, canvas);
 
-  const caption = SB.el('p', { class: 'caption' });
   // 'straight' = no decorative tilt, so pointer coordinates map exactly onto the canvas.
-  const frame = SB.el('div', { class: 'frame straight' }, [wrap, caption]);
+  const frame = SB.el('div', { class: 'frame straight' }, [wrap]);
 
   const progressText = SB.el('span');
   const dots = SB.el('div', { class: 'dots' });
@@ -90,7 +89,6 @@
     renderDots();
     const round = cfg.rounds[roundIndex];
     progressText.textContent = 'Progress 0%';
-    caption.textContent = '';
 
     let image;
     try { image = await SB.loadImage(round.image); }
@@ -116,7 +114,6 @@
     canvas.style.opacity = '1';
     drawFoil(canvas.width, canvas.height);
 
-    caption.textContent = round.caption || '';
     last = null;
     locked = false;
   }
